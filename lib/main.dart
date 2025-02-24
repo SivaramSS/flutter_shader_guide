@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       if (milliSecondsPassed % 20 == 0.0) {
         repaintNotifier.value = milliSecondsPassed;
       }
-    }); //.start();
+    }).start();
   }
 
   void loadMyShader() async {
@@ -69,21 +69,28 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             Align(
               alignment: Alignment.center,
               child: Container(
-                alignment: Alignment.center,
-                child: Card(
-                  child: Container(
-                    padding: EdgeInsets.all(24),
-                    child: Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      direction: Axis.vertical,
-                      children: [
-                        Text("MY LOCATION"),
-                        Text("Mt. Everest"),
-                        Text("-32°"),
-                        Text("Snowy"),
-                        Text("H:-27°, L:-34°"),
-                      ],
-                    ),
+                decoration: BoxDecoration(
+                  color: Color(0x75ffffff),
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(color: Color(0xffdedede), width: 0.5)
+                ),
+                // surfaceTintColor: Colors.white,
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 24, horizontal: 40),
+                  child: Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    direction: Axis.vertical,
+                    children: [
+                      Text("MY LOCATION", style: TextStyle(fontSize: 13)),
+                      SizedBox(height: 2),
+                      Text("Mt. Everest", style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
+                      SizedBox(height: 8),
+                      Text("-32°", style: TextStyle(fontSize: 57)),
+                      SizedBox(height: 8),
+                      Text("Snowy", style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500)),
+                      SizedBox(height: 4),
+                      Text("H:-27° L:-34°", style: TextStyle(fontSize: 17)),
+                    ],
                   ),
                 ),
               ),
