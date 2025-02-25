@@ -41,18 +41,20 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     loadMyShader();
-    createTicker((d) {
-      milliSecondsPassed += 16;
-      if (milliSecondsPassed % 20 == 0.0) {
-        repaintNotifier.value = milliSecondsPassed;
-      }
-    }).start();
   }
 
   void loadMyShader() async {
     var program = await FragmentProgram.fromAsset('shaders/snowfall.frag');
     FragmentShader? shader = program.fragmentShader();
     weatherBgPaint.shader = shader;
+    createTicker((d) {
+      milliSecondsPassed += 16;
+      repaintNotifier.value = milliSecondsPassed;
+      ///use code block below instead of above line, for simulators for better frame rate
+      /*if (milliSecondsPassed % 20 == 0.0) {
+        repaintNotifier.value = milliSecondsPassed;
+      }*/
+    }).start();
     print("shader load finished");
   }
 
