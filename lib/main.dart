@@ -35,7 +35,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   Paint weatherBgPaint = Paint();
   ValueNotifier<double> repaintNotifier = ValueNotifier(0);
-  double milliSecondsPassed = 0;
 
   @override
   void initState() {
@@ -47,9 +46,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     var program = await FragmentProgram.fromAsset('shaders/snowfall.frag');
     FragmentShader? shader = program.fragmentShader();
     weatherBgPaint.shader = shader;
-    createTicker((d) {
-      milliSecondsPassed += 16;
-      repaintNotifier.value = milliSecondsPassed;
+    createTicker((duration) {
+      repaintNotifier.value = duration.inMilliseconds.toDouble();
       ///use code block below instead of above line, for simulators for better frame rate
       /*if (milliSecondsPassed % 20 == 0.0) {
         repaintNotifier.value = milliSecondsPassed;
